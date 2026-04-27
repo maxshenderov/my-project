@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Шпаргалка по Git</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+    margin: 0;
+    padding: 30px 20px;
+    line-height: 1.5;
+  }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #f05033;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  h2 {
+    color: #fff;
+    background: #f05033;
+    padding: 10px 15px;
+    border-radius: 6px 6px 0 0;
+    margin: 30px 0 0 0;
+    font-size: 18px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  th {
+    background: #fafafa;
+    font-weight: 600;
+    color: #555;
+    width: 40%;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: #fafafa; }
+  code {
+    font-family: "SF Mono", Consolas, Monaco, monospace;
+    background: #f0f0f0;
+    color: #c7254e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  .note {
+    background: #fff8e1;
+    border-left: 4px solid #ffb300;
+    padding: 12px 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+  .workflow {
+    background: #fff;
+    padding: 15px 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .workflow ol { margin: 10px 0; }
+  .workflow li { margin: 6px 0; }
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #888;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>🚀 Шпаргалка по Git</h1>
+  <p class="subtitle">Основные команды и базовые понятия</p>
+
+  <div class="note">
+    <b>Три состояния файла:</b> Working Directory → Staging (<code>git add</code>) → Repository (<code>git commit</code>)
+  </div>
+
+  <h2>⚙️ Настройка</h2>
+  <table>
+    <tr><th>Команда</th><th>Описание</th></tr>
+    <tr><td><code>git config --global user.name "Имя"</code></td><td>Задать имя пользователя</td></tr>
+    <tr><td><code>git config --global user.email "mail@x"</code></td><td>Задать email</td></tr>
+    <tr><td><code>git config --global init.defaultBranch main</code></td><td>Ветка по умолчанию — main</td></tr>
+    <tr><td><code>git config --list</code></td><td>Показать все настройки</td></tr>
+  </table>
+
+  <h2>📁 Создание репозитория</h2>
+  <table>
+    <tr><th>Команда</th><th>Описание</th></tr>
+    <tr><td><code>git init</code></td><td>Создать новый репозиторий</td></tr>
+    <tr><td><code>git clone &lt;url&gt;</code></td><td>Склонировать существующий</td></tr>
+  </table>
+
+  <h2>🔄 Основной цикл работы</h2>
+  <table>
+    <tr><th>Команда</th><th>Описание</th></tr>
+    <tr><td><code>git status</code></td><td>Что изменилось</td></tr>
+    <tr><td><code>git add &lt;file&gt;</code></td><td>Добавить файл в индекс</td></tr>
+    <tr><td><code>git add .</code></td><td>Добавить все изменения</td></tr>
+    <tr><td><code>git commit -m "сообщение"</code></td><td>Зафиксировать изменения</td></tr>
+    <tr><td><code>git log</code></td><td>История коммитов</td></tr>
+    <tr><td><code>git log --oneline --graph</code></td><td>Краткая история с графом</td></tr>
+  </table>
+
+  <h2>↩️ Отмена изменений</h2>
+  <table>
+    <tr><th>Команда</th><th>Описание</th></tr>
+    <tr><td><code>git restore &lt;file&gt;</code></td><td>Откатить изменения в файле</td></tr>
+    <tr><td><code>git restore --staged &lt;file&gt;</code></td><td>Убрать из индекса</td></tr>
+    <tr><td><code>git reset --soft HEAD~1</code></td><td>Отменить коммит, оставить изменения</td></tr>
+    <tr><td><code>git reset --hard HEAD~1</code></td><td>⚠️ Удалить последний коммит полностью</td></tr>
+    <tr><td><code>git revert &lt;commit&gt;</code></td><td>Создать отменяющий коммит</td></tr>
+  </table>
+
+  <h2>🌿 Ветки</h2>
+  <table>
+    <tr><th>Команда</th><th>Описание</th></tr>
+    <tr><td><code>git branch</code></td><td>Список веток</td></tr>
+    <tr><td><code>git branch &lt;name&gt;</code></td><td>Создать ветку</td></tr>
+    <tr><td><code>git switch &lt;name&gt;</code></td><td>Переключиться на ветку</td></tr>
+    <tr><td><code>git switch -c &lt;name&gt;</code></td><td>Создать и переключиться</td></tr>
+    <tr><td><code>git branch -d &lt;name&gt;</code></td><td>Удалить ветку</td></tr>
+    <tr><td><code>git branch -D &lt;name&gt;</code></td><td>Принудительно удалить</td></tr>
+  </table>
+
+  <h2>🔀 Слияние и перебазирование</h2>
+  <table>
+    <tr><th>Команда</th><th>Описание</th></tr>
+    <tr><td><code>git merge &lt;branch&gt;</code></td><td>Слить ветку в текущую</td></tr>
+    <tr><td><code>git rebase &lt;branch&gt;</code></td><td>Перебазировать коммиты</td></tr>
+    <tr><td><code>git merge --abort</code></td><td>Отменить merge при конфликте</td></tr>
+    <tr><td><code>git rebase --continue</code></td><td>Продолжить rebase после правок</td></tr>
+  </table>
+
+  <h2>🌐 Удалённый репозиторий</h2>
+  <table>
+    <tr><th>Команда</th><th>Описание</th></tr>
+    <tr><td><code>git remote -v</code></td><td>Список удалённых репозиториев</td></tr>
+    <tr><td><code>git remote add origin &lt;url&gt;</code></td><td>Добавить remote</td></tr>
+    <tr><td><code>git push -u origin main</code></td><td>Первый пуш с привязкой</td></tr>
+    <tr><td><code>git push</code></td><td>Отправить коммиты</td></tr>
+    <tr><td><code>git pull</code></td><td>Забрать и слить</td></tr>
+    <tr><td><code>git fetch</code></td><td>Забрать без слияния</td></tr>
+  </table>
+
+  <h2>🛠️ Полезные команды</h2>
+  <table>
+    <tr><th>Команда</th><th>Описание</th></tr>
+    <tr><td><code>git diff</code></td><td>Что изменилось (не в индексе)</td></tr>
+    <tr><td><code>git diff --staged</code></td><td>Что в индексе</td></tr>
+    <tr><td><code>git stash</code></td><td>Временно спрятать изменения</td></tr>
+    <tr><td><code>git stash pop</code></td><td>Вернуть спрятанное</td></tr>
+    <tr><td><code>git tag v1.0</code></td><td>Поставить тег</td></tr>
+    <tr><td><code>git show &lt;commit&gt;</code></td><td>Посмотреть коммит</td></tr>
+  </table>
+
+  <h2>🚑 Если что-то сломалось</h2>
+  <table>
+    <tr><th>Ситуация</th><th>Команда</th></tr>
+    <tr><td>Забыл что-то в последнем коммите</td><td><code>git commit --amend</code></td></tr>
+    <tr><td>Кто менял строку</td><td><code>git blame &lt;file&gt;</code></td></tr>
+    <tr><td>Потерял коммит</td><td><code>git reflog</code></td></tr>
+    <tr><td>Скачать только одну ветку</td><td><code>git clone -b &lt;branch&gt; &lt;url&gt;</code></td></tr>
+  </table>
+
+  <h2>📋 Типичный workflow (GitHub Flow)</h2>
+  <div class="workflow">
+    <ol>
+      <li><code>git switch -c feature/my-task</code> — создать ветку</li>
+      <li>Работаем, делаем коммиты</li>
+      <li><code>git push -u origin feature/my-task</code></li>
+      <li>Создаём Pull Request на GitHub</li>
+      <li>После ревью — merge в <code>main</code></li>
+      <li><code>git switch main &amp;&amp; git pull</code> — обновляемся</li>
+    </ol>
+  </div>
+
+  <h2>🚫 .gitignore</h2>
+  <div class="workflow">
+    <p>Файл в корне репозитория со списком того, что Git должен игнорировать:</p>
+    <pre><code>node_modules/
+*.log
+.env
+.idea/</code></pre>
+  </div>
+
+  <footer>Шпаргалка по Git • сохрани и пользуйся 🚀</footer>
+</div>
+</body>
+</html>
